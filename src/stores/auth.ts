@@ -20,11 +20,19 @@ export const useAuthStore = defineStore("auth", {
           this.user = user;
         } else {
           console.log("signed out");
+          this.user = null;
         }
       });
     },
     signIn() {
       signInWithRedirect(auth, provider);
+    },
+    async signOut() {
+      await auth.signOut();
+    },
+    async getIdToken() {
+      if (!this.user) return null;
+      return await this.user.getIdToken();
     },
   },
 });
