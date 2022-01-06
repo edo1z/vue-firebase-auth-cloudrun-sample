@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Profile } from "@/models/model";
+import { Profile, defaultProfile } from "@/models/model";
 import { hello, ping, profile } from "@/api/api";
 import { useAuthStore } from "@/stores/auth";
 
@@ -7,7 +7,7 @@ export const useMsgStore = defineStore("msg", {
   state: () => ({
     hello: "",
     ping: "",
-    profile: null as Profile | null,
+    profile: defaultProfile as Profile,
   }),
   actions: {
     async fetchHello() {
@@ -27,7 +27,7 @@ export const useMsgStore = defineStore("msg", {
       }
     },
     async fetchProfile() {
-      this.profile = null;
+      this.profile = defaultProfile;
       try {
         const idToken = await useAuthStore().getIdToken();
         if (!idToken) throw new Error("idToken is empty.");

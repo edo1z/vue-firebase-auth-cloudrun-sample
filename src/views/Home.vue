@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    Home
     <template v-if="auth.user">
       <button @click="auth.signOut()">Sign Out</button>
     </template>
@@ -26,7 +25,14 @@
       </tr>
       <tr>
         <th>Profile</th>
-        <td>{{ msg.profile }}</td>
+        <td>
+          {{ msg.profile.name }}<br />
+          <img
+            v-if="msg.profile.picture"
+            :src="msg.profile.picture"
+            style="width: 40px; hegiht: 40px"
+          />
+        </td>
       </tr>
     </table>
   </div>
